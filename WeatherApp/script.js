@@ -21,18 +21,17 @@ async function getWeatherByLocation(city,apikey) {
   function showPage(respData){
 
     const icon = `<img src=https://openweathermap.org/img/wn/${respData.weather[0].icon}@2x.png>`
+    const temp = respData.main.temp.toFixed()
+    const humidityValue = respData.main.humidity
+    const windValue = respData.wind.speed
+    const weatherImg = respData.weather[0].description.toUpperCase()
 
     const main = document.querySelector(".main-container")
     let mainDiv = document.createElement("div")
     mainDiv.classList.add("divInside")
     mainDiv.innerHTML = 
-    `<p>${icon}<br> <b> ${respData.main.temp.toFixed()}&#8451 </b><br></p>${respData.name}
-    `
-
+    `<p>${icon}<br> <b> ${temp}&#8451 </b><br></p>${respData.name}`
     main.append(mainDiv)
-
-    const humidityValue = respData.main.humidity
-    const windValue = respData.wind.speed
 
     let windDiv = document.createElement("div")
     windDiv.classList.add("divInside")
@@ -46,7 +45,7 @@ async function getWeatherByLocation(city,apikey) {
 
     let PrecipDiv = document.createElement("div")
     PrecipDiv.classList.add("divInside")
-    PrecipDiv.innerHTML = `<small>${respData.weather[0].description.toUpperCase()}</small>`
+    PrecipDiv.innerHTML = `<small>${weatherImg}</small>`
     precipt.append(PrecipDiv)
     inputText.value = ""
     already = true
